@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\ProductBrand;
+
 class MainController extends Controller
 {
     function index(){
@@ -13,8 +15,10 @@ class MainController extends Controller
     }
 
     function product(){
+        $productBrandList = ProductBrand::all()->toArray();
+        
         $viewConfig = array("siteTitle" => "Chemisphere");
-        $data = array("config" => $viewConfig);
+        $data = array("config" => $viewConfig, "productBrandList" => $productBrandList);
         return view('product', ["data" => $data]);
     }
 }

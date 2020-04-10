@@ -1394,3 +1394,29 @@ section {
   font-size: 13px;
   color: #fff;
 }
+
+/* Non-template defined styles */
+
+.pad-top-10{
+  padding-top: 10px;
+}
+
+.pad-top-20{
+  padding-top: 20px;
+}
+
+.pad-top-30{
+  padding-top: 30px;
+}
+
+.pad-bot-10{
+  padding-bottom: 10px;
+}
+
+.pad-bot-20{
+  padding-bottom: 20px;
+}
+
+.pad-bot-30{
+  padding-bottom: 30px;
+}
