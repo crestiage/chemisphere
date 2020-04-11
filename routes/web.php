@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get("/", "MainController@index");
 Route::get("/main", "MainController@index");
 Route::get("/product", "MainController@product");
+Route::get("/team", "MainController@team");
+
+Route::post("/contact", "MainController@processcontact");

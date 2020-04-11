@@ -1,6 +1,7 @@
 @extends('layouts.template')
   
 @section('content')
+<!-- @php {{ if (isset($data)) {print_r($data);} }} @endphp -->
   <!-- ======= About Us Section ======= -->
   <section id="about" class="about">
       <div class="container">
@@ -555,7 +556,40 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-stretch contact-form-wrap">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <!-- forms/contact.php -->
+          <!-- Modal -->
+          @isset($data["success"])
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  @if(count($data['errors']) > 0) 
+                  <div class = "alert alert-danger">
+                    <p> An error was encountered </p>
+                  </div>
+                  @else
+                  <div class = "alert alert-success">
+                    <p>Email has been successfully sent</p>
+                  </div>  
+                  @endif
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          @endisset
+
+            <form action="/chemisphere/public/contact" method="post" role="form" class="php-email-form">
+            {{ csrf_field() }}
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <label for="name">Your Name</label>
@@ -591,4 +625,13 @@
 
       </div>
     </section><!-- End Contact Us Section -->
+    
+    
+    @isset($data["success"]) 
+    <script> 
+       $('#exampleModal').modal('toggle');
+    </script>
+    @endisset 
+    
+
 @endsection

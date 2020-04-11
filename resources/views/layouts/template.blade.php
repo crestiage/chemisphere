@@ -25,6 +25,15 @@
 
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
+  <script src="resources/theme-resources/jquery/jquery.min.js"></script>
+  <script src="resources/theme-resources/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="resources/theme-resources/jquery.easing/jquery.easing.min.js"></script>
+  <script src="resources/theme-resources/php-email-form/validate.js"></script>
+  <script src="resources/theme-resources/jquery-sticky/jquery.sticky.js"></script>
+  <script src="resources/theme-resources/waypoints/jquery.waypoints.min.js"></script>
+  <script src="resources/theme-resources/counterup/counterup.min.js"></script>
+  <script src="resources/theme-resources/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="resources/theme-resources/venobox/venobox.min.js"></script>
 
   <!-- =======================================================
   * Template Name: Shuffle - v2.0.0
@@ -219,15 +228,8 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- theme-resources JS Files -->
-  <script src="resources/theme-resources/jquery/jquery.min.js"></script>
-  <script src="resources/theme-resources/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="resources/theme-resources/jquery.easing/jquery.easing.min.js"></script>
-  <script src="resources/theme-resources/php-email-form/validate.js"></script>
-  <script src="resources/theme-resources/jquery-sticky/jquery.sticky.js"></script>
-  <script src="resources/theme-resources/waypoints/jquery.waypoints.min.js"></script>
-  <script src="resources/theme-resources/counterup/counterup.min.js"></script>
-  <script src="resources/theme-resources/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="resources/theme-resources/venobox/venobox.min.js"></script>
+  
+
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
