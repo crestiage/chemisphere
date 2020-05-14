@@ -514,7 +514,7 @@
     </section><!-- End Our Team Section -->
 
     <!-- ======= Contact Us Section ======= -->
-    <section id="contact" class="contact section-bg">
+    <section id="contact" class="contact section-bg">  <!-- EDIT THIS -->
 
       <div class="container">
         <div class="section-title">
@@ -558,7 +558,8 @@
           <div class="col-lg-6 d-flex align-items-stretch contact-form-wrap">
           <!-- forms/contact.php -->
           <!-- Modal -->
-          @isset($data["success"])
+          <!-- @isset($data["success"]) CHANGED NAME SOMEDAY-->
+          @isset(Request::get('success'))
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

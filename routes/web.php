@@ -17,7 +17,7 @@ Route::get('/', function () {
 */
 
 Route::get("/", "MainController@index");
-Route::get("/main", "MainController@index");
+Route::get("/main", "MainController@index")->name('main');
 Route::get("/product", "MainController@product");
 Route::get("/team", "MainController@team");
 

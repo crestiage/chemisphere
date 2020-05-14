@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\ProductBrand;
 use App\ContactUsMessage;
+use Mail;
 
 class MainController extends Controller
 {
@@ -56,11 +57,24 @@ class MainController extends Controller
         ]);
              
         $contactusmessage->save();  
-        
+
         $viewConfig = array("siteTitle" => "Chemisphere");
         $data = array("config" => $viewConfig,'success' => 'success', 'errors' => array());
-        return view('main', ["data" => $data]); 
 
+
+        // Send Email
+        Mail::send('mail', array("body" => $contactusmessage), function($message) use($contactusmessage) {
+            $message->to('chemispherelabsciences-dev@outlook.com');
+            $message->subject('You have recieved an email from Chemisphere Contact Us!');
+            $message->from('chemispherelabsciences-dev@outlook.com');
+                });
+        //   INSERT TRY CATCH HERE
+        // CATCH -> ERRORPAGE     
+
+        //return redirect()->view('main', array("data" => $data)); 
+        return redirect()->route('main', ['success' => 'success','errors' => array()]);
+        //return redirect()->route('main')->with('data');        
+    
 
     }
 
