@@ -30,52 +30,48 @@ class MainController extends Controller
         return view('main', ["data" => $data]);
     }
 
-    //
     function processcontact(Request $request){
-        // $name = $request->input('name');
-        // $email = $request->input('email');
-        // $input = $request->all();
-        // echo "<pre>";
-        // //print_r($request);
-        // echo "</pre>";
-        // //var_dump($request);
-
-        // if not POST index();
+        $errors = array();
         
-        $this->validate($request, [
-            'name'      =>  'required',
-            'email'     =>  'required|email',
-            'subject'   =>  'required',
-            'message'   =>  'required'
-        ]);
+        try {
+            $this->validate($request, [
+                'name'      =>  'required',
+                'email'     =>  'required|email',
+                'subject'   =>  'required',
+                'message'   =>  'required'
+            ]);
+    
+            $contactusmessage = new ContactUsMessage([
+                'name'      =>  $request->get('name'),
+                'email'     =>  $request->get('email'),
+                'subject'   =>  $request->get('subject'),
+                'message'   =>  $request->get('message')
+            ]);
+                 
+            $contactusmessage->save();  
 
-        $contactusmessage = new ContactUsMessage([
-            'name'      =>  $request->get('name'),
-            'email'     =>  $request->get('email'),
-            'subject'   =>  $request->get('subject'),
-            'message'   =>  $request->get('message')
-        ]);
-             
-        $contactusmessage->save();  
+        } catch (Exception $e) {
+            array_push($errors, $e->getMessage());
+        }
 
         $viewConfig = array("siteTitle" => "Chemisphere");
-        $data = array("config" => $viewConfig,'success' => 'success', 'errors' => array());
-
+        $data = array("config" => $viewConfig,'success' => 'success', 'errors' => array()); //not needed
 
         // Send Email
+        try {
         Mail::send('mail', array("body" => $contactusmessage), function($message) use($contactusmessage) {
             $message->to('chemispherelabsciences-dev@outlook.com');
-            $message->subject('You have recieved an email from Chemisphere Contact Us!');
+            $message->subject('You have recieved an email from Chemisphere Lab Sciences Contact Us!');
             $message->from('chemispherelabsciences-dev@outlook.com');
                 });
-        //   INSERT TRY CATCH HERE
-        // CATCH -> ERRORPAGE     
+        } catch (Exception $e) {
+            array_push($errors, $e->getMessage());  
+        }
 
         //return redirect()->view('main', array("data" => $data)); 
-        return redirect()->route('main', ['success' => 'success','errors' => array()]);
+       return redirect()->route('main', ['success' => 'success','errors' => count($errors) ]);
         //return redirect()->route('main')->with('data');        
     
-
     }
 
 }

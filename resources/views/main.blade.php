@@ -558,8 +558,7 @@
           <div class="col-lg-6 d-flex align-items-stretch contact-form-wrap">
           <!-- forms/contact.php -->
           <!-- Modal -->
-          <!-- @isset($data["success"]) CHANGED NAME SOMEDAY-->
-          @isset(Request::get('success'))
+          @isset($_GET['success'])
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -570,7 +569,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  @if(count($data['errors']) > 0) 
+               @if($_GET['errors'] > 0)
                   <div class = "alert alert-danger">
                     <p> An error was encountered </p>
                   </div>
@@ -628,7 +627,7 @@
     </section><!-- End Contact Us Section -->
     
     
-    @isset($data["success"]) 
+    @isset($_GET['success'])
     <script> 
        $('#exampleModal').modal('toggle');
     </script>
