@@ -1,7 +1,7 @@
 @extends('layouts.template')
   
 @section('content')
-<!-- @php {{ if (isset($data)) {print_r($data);} }} @endphp -->
+
   <!-- ======= About Us Section ======= -->
   <section id="about" class="about">
       <div class="container">
@@ -273,6 +273,7 @@
     </section><!-- End Info Box Section -->
 
     <!-- ======= Our Portfolio Section ======= -->
+    @isset($data["productData"])
     <section id="portfolio" class="portfolio section-bg">
       <div class="container">
 
@@ -285,15 +286,38 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
+              @foreach ($data["productBrandData"] as $productBrand)
+              @php $brandClassName = ".filter-" . $productBrand->code; @endphp
+              <li data-filter="{{$brandClassName}}">{{$productBrand->name}}</li>
+              @endforeach
+              <!--
               <li data-filter=".filter-app">App</li>
               <li data-filter=".filter-card">Card</li>
               <li data-filter=".filter-web">Web</li>
+              -->
             </ul>
           </div>
         </div>
 
         <div class="row portfolio-container">
-
+        @foreach ($data["productData"] as $product)
+        @php $productDataClassName = "filter-" . $product->product_brand_code; @endphp
+          <div class="col-lg-4 col-md-6 portfolio-item {{$productDataClassName}}">
+            <div class="portfolio-wrap">
+              <img src="{{ $product->display_image_filepath == null ? $data['config']['defaultEmptyProductImagePath'] : $product->display_image_filepath }}" 
+              class="img-thumbnail">
+              <div class="portfolio-info">
+                <h3>{{$product->name}}</h3>
+                <!-- <p></p> -->
+              </div>
+              <div class="portfolio-links">
+                <!-- <a href="resources/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a> -->
+                <a href="#" title="More Details">More Details</a>
+              </div>
+            </div>
+          </div>
+        @endforeach
+          <!--
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
               <img src="resources/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
@@ -419,11 +443,12 @@
               </div>
             </div>
           </div>
-
+          -->
         </div>
 
       </div>
     </section><!-- End Our Portfolio Section -->
+    @endisset
 
     <!-- ======= Our Team Section ======= -->
     <section id="team" class="team">

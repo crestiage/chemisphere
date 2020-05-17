@@ -148,4 +148,9 @@ return [
 
     'attributes' => [],
 
+    /* product.blade.php error messages */
+    'product_brand_code_required' => 'Please input a brand code.',
+    'product_brand_name_required' => 'Please input a brand name.',
+    'product_name_required' => 'Please input a product name.',
+
 ];

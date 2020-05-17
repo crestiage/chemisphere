@@ -22,3 +22,5 @@ Route::get("/product", "MainController@product");
 Route::get("/team", "MainController@team");
 
 Route::post("/contact", "MainController@processcontact");
+
+Route::post("/saveProduct", "MainController@saveProduct");
