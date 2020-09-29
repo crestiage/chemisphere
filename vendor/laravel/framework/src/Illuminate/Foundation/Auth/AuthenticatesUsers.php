@@ -17,7 +17,9 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        $viewConfig = array("siteTitle" => "Chemisphere");
+        $data = array("config" => $viewConfig);
+        return view('auth.login', ["data" => $data]);
     }
 
     /**

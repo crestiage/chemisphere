@@ -165,6 +165,7 @@
     </section><!-- End Our Services Section -->
 
     <!-- ======= Cta Section ======= -->
+    <!--
     <section class="cta">
       <div class="container">
 
@@ -175,7 +176,9 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section>
+    -->
+    <!-- End Cta Section -->
 
     <!-- ======= More Services Section ======= -->
     <section class="more-services section-bg">
@@ -304,7 +307,7 @@
         @php $productDataClassName = "filter-" . $product->product_brand_code; @endphp
           <div class="col-lg-4 col-md-6 portfolio-item {{$productDataClassName}}">
             <div class="portfolio-wrap">
-              <img src="{{ $product->display_image_filepath == null ? $data['config']['defaultEmptyProductImagePath'] : $product->display_image_filepath }}" 
+              <img src="{{ $product->display_image_filepath == null ? asset($data['config']['defaultEmptyProductImagePath']) : asset($product->display_image_filepath) }}" 
               class="img-thumbnail">
               <div class="portfolio-info">
                 <h3>{{$product->name}}</h3>

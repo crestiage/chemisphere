@@ -25,7 +25,7 @@
                 <h2>@lang("messages.manage_products")</h2>
                 <form class="product_update_form" id="product_update_form" enctype='multipart/form-data' action='{{$data["config"]["formAction"]}}' method="post">
                     {{ csrf_field() }}
-
+                    <input type="hidden" name="product_id" value="{{ $product->id ?? null }}">
                     <div class="row align-items-end">
 
                         <div class="col">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col">
                             <label>@lang("messages.image_preview")</label><br />
-                            <img src="{{ asset('resources/img/80x80.png') }}" id="preview" class="img-thumbnail">
+                            <img src="{{ asset($productDisplayImage) }}" id="preview" class="img-thumbnail">
                         </div>
                     </div>
                     <hr>

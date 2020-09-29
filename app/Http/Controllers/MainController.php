@@ -12,7 +12,7 @@ class MainController extends Controller
 {
     function index(){
         $viewConfig = array("siteTitle" => "Chemisphere", 
-        "defaultEmptyProductImagePath" => "{{ asset('resources/img/portfolio/portfolio-1.jpg') }}");
+        "defaultEmptyProductImagePath" => "resources/img/defaults/no-image-available.jpg");
 
         $productBrandData = DB::table("product_brand as pb")
         ->join("product as pr", "pb.code", "=", "pr.product_brand_code")
