@@ -278,7 +278,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Our Portfolio</h2>
+          <h2>Product Line</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
@@ -312,7 +312,9 @@
               </div>
               <div class="portfolio-links">
                 <!-- <a href="resources/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a> -->
-                <a href="#" title="More Details">More Details</a>
+                <a href="javascript:void(0);" onclick="javascript:triggerProductDescriptionModal('{{$product->id}}')" title="More Details">More Details</a>
+                <a href="/productUpdate/{{$product->id}}" title="Update"><i class="far fa-edit"></i></a>
+                <a href="javascript:void(0);" title="Delete"><i class="fas fa-trash-alt"></i></a>
               </div>
             </div>
           </div>
@@ -658,5 +660,47 @@
     </script>
     @endisset 
     
+    <!-- Modal -->
+    <div class="modal fade" id="productDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="productDescriptionModalTitle" aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 900px" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productDescriptionModalTitle">Product Title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="productDescriptionModalBody">
+            Product Description
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function triggerProductDescriptionModal(productId){
+        var url = "api/product/" + productId;
+        $.get(url, function(data){
+          var productTitle = "<div style='font-size: 35px; color: #5b97c8;'>" + data.name + "</div>";
+          var productImage = data.display_image_filepath;
+          if (productImage != null){
+            var img = "<div style='text-align: right;'><img class='img-fluid' src='"+ productImage +"'></div>";
+            productTitle = productTitle + img;
+          }
+          $("#productDescriptionModalTitle").html(productTitle);
+          $("#productDescriptionModalBody").html(data.description);
+        }).fail(function(){
+          $("#productDescriptionModalTitle").html("Invalid Product");
+          $("#productDescriptionModalBody").html("Error while fetching this product's data");
+        }).always(function(){
+          $('#productDescriptionModal').modal('toggle');
+        });
+
+        return false;
+      }
+    </script>
 
 @endsection

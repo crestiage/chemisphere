@@ -18,9 +18,11 @@ Route::get('/', function () {
 
 Route::get("/", "MainController@index");
 Route::get("/main", "MainController@index")->name('main');
-Route::get("/product", "MainController@product");
 Route::get("/team", "MainController@team");
 
 Route::post("/contact", "MainController@processcontact");
 
-Route::post("/saveProduct", "MainController@saveProduct");
+// Product Routes
+Route::get("/product", "ProductController@product");
+Route::get("/updateProduct/{productId}", "ProductController@updateProduct");
+Route::post("/saveProduct", "ProductController@saveProduct");

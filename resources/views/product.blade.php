@@ -17,23 +17,23 @@
     
 @endphp
 
-    <link href="resources/css/quill.snow.css" rel="stylesheet">
+    <link href="{{ asset('resources/css/quill.snow.css') }}" rel="stylesheet">
 
     <div class="container pad-top-30 pad-bot-30">
         <div class="row">
             <div class="col-md-12">
                 <h2>@lang("messages.manage_products")</h2>
-                <form class="product_update_form" id="product_update_form" enctype='multipart/form-data' action='/saveProduct' method="post">
+                <form class="product_update_form" id="product_update_form" enctype='multipart/form-data' action='{{$data["config"]["formAction"]}}' method="post">
                     {{ csrf_field() }}
 
                     <div class="row align-items-end">
 
                         <div class="col">
                             <label for="product_brand_dropdown">@lang("messages.product_brand")</label>
-                            <select id="product_brand_dropdown" name="product_brand_dropdown" class="form-control">
+                            <select id="product_brand_dropdown" name="product_brand_dropdown" class="form-control" value="{{ $product->product_brand_code ?? old('product_brand_dropdown') }}">
                                 <option>Select...</option>
                                 @foreach($data["productBrandList"] as $productBrand)
-                                    <option value="{{$productBrand['code']}}">{{$productBrand['name']}}</option>
+                                    <option value="{{$productBrand['code']}}" {{ $selectedProductBrandCode === $productBrand['code'] ? 'selected' : '' }}>{{$productBrand['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -69,7 +69,8 @@
                     <div class="row align-items-end pad-top-10">
                         <div class="col">
                             <label for="product_name_textbox">@lang("messages.product_name")</label>
-                            <input type="text" name="product_name_textbox" class="form-control" placeholder="@lang('messages.product_name')" required>
+                            <input type="text" name="product_name_textbox" class="form-control" placeholder="@lang('messages.product_name')" 
+                            value = "{{ $product->name ?? old('product_name_textbox') }}" required>
                             <div class="invalid-feedback">
                                 @lang("validation.product_name_required")
                             </div>
@@ -82,7 +83,7 @@
                             <div class="editor_full">
                                 <div id="document_full" class="ql-scroll-y"></div>
                             </div>
-                            <textarea name="product_description_textarea" id="product_description_textarea" style="display: none;"></textarea>
+                            <textarea name="product_description_textarea" id="product_description_textarea" style="display: none;">{{ $product->description ?? old('product_description_textarea') }}</textarea>
                         </div>
                     </div>
 
@@ -93,7 +94,7 @@
                         </div>
                         <div class="col">
                             <label>@lang("messages.image_preview")</label><br />
-                            <img src="resources/img/80x80.png" id="preview" class="img-thumbnail">
+                            <img src="{{ asset('resources/img/80x80.png') }}" id="preview" class="img-thumbnail">
                         </div>
                     </div>
                     <hr>
@@ -110,7 +111,7 @@
     </div>
 
     <!-- <script src="resources/js/sprite.svg.js"></script> -->
-    <script src="resources/js/quill.js"></script>
+    <script src="{{ asset('resources/js/quill.js') }}"></script>
     
     <script>
         // New Brand Checkbox logic
@@ -217,9 +218,18 @@
             alert(quillFull.container.firstChild.innerHTML);
         });
 
+        function htmlDecode(input){
+            var e = document.createElement('textarea');
+            e.innerHTML = input;
+            // handle case of empty input
+            return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+        }
+
         $("#product_update_form").on("submit",function(){
             $("#product_description_textarea").val(quillFull.container.firstChild.innerHTML);
         });
+
+        quillFull.root.innerHTML = (htmlDecode("{{ $product->description ?? old('product_description_textarea') }}"));
     </script>
 
 @endsection
