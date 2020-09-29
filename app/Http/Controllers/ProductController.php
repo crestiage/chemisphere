@@ -12,9 +12,14 @@ use App\Product;
 class ProductController extends Controller
 {
 
+    private $defaultProductDisplayPreviewImage = "resources/img/80x80.png";
+
     // #TODO: Add Product Added Successfully message
-    function saveProduct(Request $request, $productId = null){
+    function saveProduct(Request $request){
         $input = $request->all();
+
+        $productId = $request->get("product_id");
+
         $productBrandList = ProductBrand::all()->toArray();
 
         $isNewProductBrand = $request->get("new_brand_checkbox");
@@ -86,7 +91,9 @@ class ProductController extends Controller
             $product->name = $productName;
             $product->description = $productDescription;
             $product->product_brand_code = $productBrandCode;
-            $product->display_image_filepath = $displayImageFilepath;
+            if ($displayImageFilepath != null){
+                $product->display_image_filepath = $displayImageFilepath;
+            }
         }
         
         $product->save();
@@ -100,31 +107,29 @@ class ProductController extends Controller
         ]);
         */
 
-        $viewConfig = array("siteTitle" => "Chemisphere");
+        $viewConfig = array("siteTitle" => "Chemisphere", "formAction" => "/saveProduct");
         $data = array("config" => $viewConfig, "productBrandList" => $productBrandList, "inputs" => $input, 
-        "brandResult" => $getBrandByCodeResult);
+        "brandResult" => $getBrandByCodeResult, "productDisplayImage" => $this->defaultProductDisplayPreviewImage);
         
         return view('product', ["data" => $data]);
     }
 
-    function saveProductUpdate(){
-
-    }
-    
     function updateProduct($productId){
         $productBrandList = ProductBrand::all()->toArray();
         
         $product = Product::find($productId);
 
-        $viewConfig = array("siteTitle" => "Chemisphere", "formAction" => "/saveProductUpdate");
+        $viewConfig = array("siteTitle" => "Chemisphere", "formAction" => "/saveProduct");
         $data = array("config" => $viewConfig, "productBrandList" => $productBrandList);
         
         $selectedProductBrandCode = null;
         if ($product != null){
             $selectedProductBrandCode = $product->product_brand_code;
+            $productDisplayImage = ($product->display_image_filepath == null) ? $this->defaultProductDisplayPreviewImage : $product->display_image_filepath;
         }
 
-        return view('product', ["data" => $data, "product" => $product, "selectedProductBrandCode" => $selectedProductBrandCode]);
+        return view('product', ["data" => $data, "product" => $product, "selectedProductBrandCode" => $selectedProductBrandCode,
+        "productDisplayImage" => $productDisplayImage]);
     }
 
     private function _SaveProductBrand($brandCode, $brandName, $brandDescription){

@@ -26,3 +26,10 @@ Route::post("/contact", "MainController@processcontact");
 Route::get("/product", "ProductController@product");
 Route::get("/updateProduct/{productId}", "ProductController@updateProduct");
 Route::post("/saveProduct", "ProductController@saveProduct");
+
+// Login Routes
+// Route::get("/login", "Auth\LoginController@showLoginForm");
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
