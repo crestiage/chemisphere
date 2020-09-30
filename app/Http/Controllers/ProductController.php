@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 use App\ProductBrand;
 use App\Product;
 
@@ -160,5 +162,33 @@ class ProductController extends Controller
         $data = array("config" => $viewConfig, "productBrandList" => $productBrandList);
         
         return view('product', ["data" => $data]);
+    }
+
+    public function softDeleteProduct(Request $request){
+        $productId = $request->get("product_id");
+        $message = "Successfully soft deleted product";
+        $error = true;
+        $responseCode = 200;
+
+        if (isset($productId) && $productId != null){
+            $product = Product::find($productId);
+            if ($product != null){
+                try{
+                    $product->soft_delete_flag = 1;
+                    $product->save();
+                    $error = false;
+                }catch (\Illuminate\Database\QueryException $e){
+                    $message = "Error in processing query";
+                }
+            }else{
+                $message = "No product with id $productId found";
+            }
+        }else{
+            $message = "Invalid request";
+        }
+        if ($error){
+            $responseCode = 400;
+        }
+        return response()->json($product, $responseCode);
     }
 }

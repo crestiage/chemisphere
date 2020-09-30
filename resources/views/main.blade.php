@@ -288,7 +288,7 @@
         <div class="row">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter="*" class="filter-active" id="product-filter-all">All</li>
               @foreach ($data["productBrandData"] as $productBrand)
               @php $brandClassName = ".filter-" . $productBrand->code; @endphp
               <li data-filter="{{$brandClassName}}">{{$productBrand->name}}</li>
@@ -305,7 +305,7 @@
         <div class="row portfolio-container">
         @foreach ($data["productData"] as $product)
         @php $productDataClassName = "filter-" . $product->product_brand_code; @endphp
-          <div class="col-lg-4 col-md-6 portfolio-item {{$productDataClassName}}">
+          <div class="col-lg-4 col-md-6 portfolio-item {{$productDataClassName}}" id="product-container-{{$product->id}}">
             <div class="portfolio-wrap">
               <img src="{{ $product->display_image_filepath == null ? asset($data['config']['defaultEmptyProductImagePath']) : asset($product->display_image_filepath) }}" 
               class="img-thumbnail">
@@ -315,9 +315,13 @@
               </div>
               <div class="portfolio-links">
                 <!-- <a href="resources/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a> -->
-                <a href="javascript:void(0);" onclick="javascript:triggerProductDescriptionModal('{{$product->id}}')" title="More Details">More Details</a>
-                <a href="/productUpdate/{{$product->id}}" title="Update"><i class="far fa-edit"></i></a>
-                <a href="javascript:void(0);" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                <a href="javascript:void(0);" id="productMoreDetailsButton" data-product-id="{{$product->id}}" title="More Details">More Details</a>
+                @auth
+                <a href="/updateProduct/{{$product->id}}" title="Update"><i class="far fa-edit"></i></a>
+                <a href="javascript:void(0);" id="deleteProductButton" data-product-id="{{$product->id}}" title="Delete">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+                @endauth
               </div>
             </div>
           </div>
@@ -683,7 +687,26 @@
       </div>
     </div>
 
-    <script>
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="notificationModalTitle">Product Title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="notificationModalBody">
+            Product Description
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
       function triggerProductDescriptionModal(productId){
         var url = "api/product/" + productId;
         $.get(url, function(data){
@@ -704,6 +727,66 @@
 
         return false;
       }
+      // onclick="javascript:triggerProductDescriptionModal('{{$product->id}}')"
+      $(document).on("click", "#productMoreDetailsButton", function(){
+          var productId = $(this).data("product-id");
+          triggerProductDescriptionModal(productId);
+      });
+
+      @auth
+      $(document).on("click", "#deleteProductButton", function(){         
+          if (!confirm("Are you sure you want to delete this product?")){
+            return false;
+          }
+          var productId = $(this).data("product-id");
+          triggerProductSoftDelete(productId);
+      });
+      @endauth
+
+      function triggerProductSoftDelete(productId){
+        
+        var userToken = '{{ Auth::user()->api_token }}';
+        var url = "api/product/delete";
+        var title = "Delete Product";
+        var message = "Successfully deleted product";
+
+        var bearerToken = "Bearer " + userToken;
+        // alert(bearerToken);
+
+        $.ajax({
+          type: 'POST',
+          url: url,
+          beforeSend: function(request) {
+            request.setRequestHeader("Authorization", bearerToken);
+          },
+          data: {"product_id" : productId},
+          success: function(data){
+            message = message + " " + data.productName;
+            var productContainerId = "#product-container-" + productId;
+            // Remove product element
+            $(productContainerId).remove();
+            // Click all to refresh the product list positioning
+            $("#product-filter-all").click();
+          }, error: function(data){
+            console.log(data);
+          }, fail: function(data){
+            console.log(data);
+            title = "Delete Product Failed";
+            message = "Failed to delete product";
+          }, always: function(data){
+            triggerNotificationModal(title, message);  
+          }
+        });
+        
+      }
+
+      function triggerNotificationModal(title, message){
+        $("#notificationModalTitle").html(title);
+        $("#notificationModalBody").html(message);
+        $('#notificationModal').modal('toggle');
+      }
+
+      
     </script>
 
 @endsection

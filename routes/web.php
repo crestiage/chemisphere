@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 */
 
-Route::get("/", "MainController@index");
+Route::get("/", "MainController@index")->name('home');
 Route::get("/main", "MainController@index")->name('main');
 Route::get("/team", "MainController@team");
 
@@ -32,4 +32,4 @@ Route::post("/saveProduct", "ProductController@saveProduct");
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

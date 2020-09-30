@@ -33,7 +33,7 @@
                             <select id="product_brand_dropdown" name="product_brand_dropdown" class="form-control" value="{{ $product->product_brand_code ?? old('product_brand_dropdown') }}">
                                 <option>Select...</option>
                                 @foreach($data["productBrandList"] as $productBrand)
-                                    <option value="{{$productBrand['code']}}" {{ $selectedProductBrandCode === $productBrand['code'] ? 'selected' : '' }}>{{$productBrand['name']}}</option>
+                                    <option value="{{$productBrand['code']}}" {{ isset($selectedProductBrandCode) && $selectedProductBrandCode  === $productBrand['code'] ? 'selected' : '' }}>{{$productBrand['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col">
                             <label>@lang("messages.image_preview")</label><br />
-                            <img src="{{ asset($productDisplayImage) }}" id="preview" class="img-thumbnail">
+                            <img src="{{ isset($productDisplayImage) ? asset($productDisplayImage) : asset('resources/img/80x80.png') }}" id="preview" class="img-thumbnail">
                         </div>
                     </div>
                     <hr>

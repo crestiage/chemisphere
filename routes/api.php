@@ -21,3 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('product/{id}', function($id){
     return Product::find($id);
 });
+
+// Route::post('register', 'Auth\RegisterController@register');
+
+Route::middleware('auth:api')->post('product/delete', 'ProductController@softDeleteProduct');

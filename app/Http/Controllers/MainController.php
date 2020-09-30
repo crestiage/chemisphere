@@ -26,6 +26,7 @@ class MainController extends Controller
         ->select("product.*", "product_brand.name as product_brand_name")
         ->orderBy("product_brand.name", "asc")
         ->orderBy("product.name", "asc")
+        ->where("product.soft_delete_flag", "=", 0)
         ->get();
 
         $data = array("config" => $viewConfig, "productData" => $productData, "productBrandData" => $productBrandData);

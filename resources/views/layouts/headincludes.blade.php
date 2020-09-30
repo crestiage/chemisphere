@@ -33,6 +33,14 @@
   <script src="{{ asset('resources/theme-resources/isotope-layout/isotope.pkgd.min.js') }}"></script>
   <script src="{{ asset('resources/theme-resources/venobox/venobox.min.js') }}"></script>
 
+  <script>
+    $(document).ajaxStart(function() {
+      $('.loader').show(); // show the gif image when ajax starts
+    }).ajaxStop(function() {
+      $('.loader').hide(); // hide the gif image when ajax completes
+    });
+  </script>
+
   <!-- =======================================================
   * Template Name: Shuffle - v2.0.0
   * Template URL: https://bootstrapmade.com/bootstrap-3-one-page-template-free-shuffle/

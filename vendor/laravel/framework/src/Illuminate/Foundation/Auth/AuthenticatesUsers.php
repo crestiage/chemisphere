@@ -45,6 +45,8 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
+            $user = $this->guard()->user();
+            $user->generateToken();
             return $this->sendLoginResponse($request);
         }
 
@@ -157,6 +159,13 @@ trait AuthenticatesUsers
      */
     public function logout(Request $request)
     {
+        $user = Auth::guard('api')->user();
+        if ($user){
+            // Clear API Token on logout
+            $user->api_token = null;
+            $user->save();
+        }
+        
         $this->guard()->logout();
 
         $request->session()->invalidate();
