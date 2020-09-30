@@ -201,7 +201,7 @@
             [{
             'align': []
             }],
-            ['link', 'image'],
+            ['link', 'image', 'video'],
 
             ['clean'] // remove formatting button
         ];
