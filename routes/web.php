@@ -24,8 +24,8 @@ Route::post("/contact", "MainController@processcontact");
 
 // Product Routes
 Route::middleware('auth:api')->get("/product", "ProductController@product");
-Route::get("/updateProduct/{productId}", "ProductController@updateProduct");
-Route::post("/saveProduct", "ProductController@saveProduct");
+Route::middleware('auth:api')->get("/updateProduct/{productId}", "ProductController@updateProduct");
+Route::middleware('auth:api')->post("/saveProduct", "ProductController@saveProduct");
 
 // Login Routes
 // Route::get("/login", "Auth\LoginController@showLoginForm");

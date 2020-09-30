@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'chemisphere'),
+    'name' => env('APP_NAME', 'Chemisphere'),
 
     /*
     |--------------------------------------------------------------------------
