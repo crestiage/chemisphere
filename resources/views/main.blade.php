@@ -745,7 +745,7 @@
 
       function triggerProductSoftDelete(productId){
         
-        var userToken = '{{ Auth::user()->api_token }}';
+        var userToken = '{{ Auth::user()->api_token ?? '' }}';
         var url = "api/product/delete";
         var title = "Delete Product";
         var message = "Successfully deleted product";

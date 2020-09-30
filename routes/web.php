@@ -23,7 +23,7 @@ Route::get("/team", "MainController@team");
 Route::post("/contact", "MainController@processcontact");
 
 // Product Routes
-Route::get("/product", "ProductController@product");
+Route::middleware('auth:api')->get("/product", "ProductController@product");
 Route::get("/updateProduct/{productId}", "ProductController@updateProduct");
 Route::post("/saveProduct", "ProductController@saveProduct");
 
