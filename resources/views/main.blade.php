@@ -8,7 +8,7 @@
 
         <div class="section-title">
           <h2>About Us</h2>
-            <p>
+            <p style="text-align: left;">
               Chemisphere Lab Sciences, Inc. specializes in the distribution and marketing of high performance scientific instruments, laboratory supplies and raw materials. <br />
               Our principals and partners are the best in their respective applications and industries. <br />
               Our core values are derived from our yearning to serve the industry with utmost excellence coupled with high level of service commitment. <br />
@@ -22,16 +22,17 @@
             <img src="resources/img/about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content">
-            <h3>Voluptatem dignissimos <strong>provident quasi corporis voluptates</strong></h3>
+            <h3><strong>Our Mission</strong></h3>
             <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              To educate the market on the new trends and innovations in the field analytical instrumentation. To serve the best value for money products in the laboratory, process and mobile analytics; and give unparalleled after-sales support to our customers as well as alleviate laboratory analysis complexities.
             </p>
             <p>
               Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
             </p>
 
+            @php
+            /*
             <div class="skills-content">
 
               <div class="progress">
@@ -63,6 +64,8 @@
               </div>
 
             </div>
+            */
+            @endphp
 
           </div>
         </div>
@@ -75,7 +78,48 @@
       <div class="container">
 
         <div class="row no-gutters">
-
+          <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="icofont-info-circle"></i>
+              <span>Our Background</span>
+              <!-- <span data-toggle="counter-up">232</span> -->
+              <ul>
+                <li>Established in 2014</li>
+                <li>Specializes in marketing & distribution of scientific instruments</li>
+                <li><strong>100%</strong> Filipino Owned</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="icofont-briefcase"></i>
+              <span>Our Business</span>
+              <!-- <span data-toggle="counter-up">232</span> -->
+              <ul>
+                <li>Spectroscopy & Chromatography Instruments</li>
+                <li>General Lab Equipment</li>
+                <li>Consumables</li>
+                <li>Equipment Repair and Maintenance</li>
+              </ul>
+              <a class="scrollto" href="#portfolio">Find out more &raquo;</a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="fas fa-users"></i>
+              <span>Our Team</span>
+              <!-- <span data-toggle="counter-up">232</span> -->
+              <ul>
+                <li>Industry Specialists</li>
+                <li>Extensively Trained</li>
+                <li>Blend of skills & technical know-how</li>
+                <li>Highly committed</li>
+              </ul>
+              <a class="scrollto" href="#team">Find out more &raquo;</a>
+            </div>
+          </div>
+          @php
+          /*
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="icofont-simple-smile"></i>
@@ -111,6 +155,8 @@
               <a href="#">Find out more &raquo;</a>
             </div>
           </div>
+        */
+        @endphp
 
         </div>
 
@@ -743,6 +789,12 @@
       });
       @endauth
 
+      // Resets the product description modal on close (in case an embedded video was played and the modal was closed)
+      $(document).on("hidden.bs.modal", "#productDescriptionModal", function(){
+        $("#productDescriptionModalTitle").html("Product Title");
+        $("#productDescriptionModalBody").html("Product Description");
+      });
+      
       function triggerProductSoftDelete(productId){
         
         var userToken = '{{ Auth::user()->api_token ?? '' }}';

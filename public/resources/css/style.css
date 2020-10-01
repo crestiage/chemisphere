@@ -558,7 +558,7 @@ section {
 }
 
 .counts .count-box span {
-  font-size: 42px;
+  font-size: 30px;
   line-height: 24px;
   display: block;
   font-weight: 700;
@@ -571,6 +571,14 @@ section {
   margin: 0;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
+}
+
+.counts .count-box ul {
+  padding: 30px 0 0 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  margin-left: 30px;
 }
 
 .counts .count-box a {

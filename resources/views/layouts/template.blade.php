@@ -150,10 +150,12 @@
           <div class="col-lg-3 col-md-6 footer-info">
             <h3>Shuffle</h3>
             <p>
-              A108 Adam Street <br>
-              NY 535022, USA<br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              ETNB 104 Estrellita Center Building II <br />
+              Tierra Nueva Commercial Complex <br />
+              Alabang-Zapote Rd Brgy. Cupang <br />
+              Muntinlupa City, 1771 <br />
+              <strong>Phone:</strong> 478-1145<br>
+              <strong>Email:</strong> richie.eustaquio@chemispherelab.com<br>
             </p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -167,14 +169,14 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#header" class="scrollto">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about" class="scrollto">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services" class="scrollto">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li> -->
+              <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
             </ul>
           </div>
-
+          <!--
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
@@ -185,6 +187,7 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
             </ul>
           </div>
+          -->
           <!--
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
