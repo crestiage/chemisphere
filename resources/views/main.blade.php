@@ -26,10 +26,6 @@
             <p class="font-italic">
               To educate the market on the new trends and innovations in the field analytical instrumentation. To serve the best value for money products in the laboratory, process and mobile analytics; and give unparalleled after-sales support to our customers as well as alleviate laboratory analysis complexities.
             </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-            </p>
 
             @php
             /*
@@ -614,22 +610,27 @@
               <div class="col-lg-6 info d-flex flex-column align-items-stretch">
                 <i class="bx bx-map"></i>
                 <h4>Address</h4>
-                <p>A108 Adam Street,<br>New York, NY 535022</p>
+                <p>
+                  ETNB 104 Estrellita Center Building II <br />
+                  Tierra Nueva Commercial Complex <br />
+                  Alabang-Zapote Rd Brgy. Cupang <br />
+                  Muntinlupa City, 1771
+                </p>
               </div>
               <div class="col-lg-6 info info-bg d-flex flex-column align-items-stretch">
                 <i class="bx bx-phone"></i>
                 <h4>Call Us</h4>
-                <p>+1 5589 55488 55<br>+1 5589 22548 64</p>
+                <p>(+63) 478-1145</p>
               </div>
               <div class="col-lg-6 info info-bg d-flex flex-column align-items-stretch">
                 <i class="bx bx-envelope"></i>
                 <h4>Email Us</h4>
-                <p>contact@example.com<br>info@example.com</p>
+                <p>richie.eustaquio@chemispherelab.com</p>
               </div>
               <div class="col-lg-6 info d-flex flex-column align-items-stretch">
                 <i class="bx bx-time-five"></i>
                 <h4>Working Hours</h4>
-                <p>Mon - Fri: 9AM to 5PM<br>Sunday: 9AM to 1PM</p>
+                <p>Mon - Fri: 9AM to 5PM</p>
               </div>
             </div>
 

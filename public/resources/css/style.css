@@ -1109,13 +1109,14 @@ section {
 
 .contact .info i {
   font-size: 48px;
-  color: #56e7d0;
+  color: #4682B4;
   margin-bottom: 15px;
 }
 
 .contact .info h4 {
   padding: 0;
   margin: 0 0 10px 0;
+  color: #4b605c;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
@@ -1440,4 +1441,8 @@ section {
   background: url('/resources/img/icons/ajax-loader.gif') 
               50% 50% no-repeat;/* rgb(249,249,249);*/
    background-color: rgb(249,249,249, 0.5); 
+}
+
+.theme-bg-color{
+  color: #4682B4;
 }
